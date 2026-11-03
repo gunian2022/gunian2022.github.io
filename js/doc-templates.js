@@ -178,12 +178,13 @@
     const frag = document.createDocumentFragment();
     lines.forEach((line, index) => {
       const span = document.createElement('span');
-      const tone = line.startsWith('### ') ? 'dt-l3'
-        : line.startsWith('## ') ? 'dt-l2'
-          : line.startsWith('# ') ? 'dt-l1'
-            : line.startsWith('> ') ? 'dt-quote'
-              : line.startsWith('|') ? 'dt-table'
-                : '';
+      const tone = line.startsWith('#### ') ? 'dt-l4'
+        : line.startsWith('### ') ? 'dt-l3'
+          : line.startsWith('## ') ? 'dt-l2'
+            : line.startsWith('# ') ? 'dt-l1'
+              : line.startsWith('> ') ? 'dt-quote'
+                : line.startsWith('|') ? 'dt-table'
+                  : '';
       if (tone) span.className = tone;
       span.textContent = index < lines.length - 1 ? `${line}\n` : line;
       frag.append(span);
@@ -201,6 +202,7 @@
     $('dtDetailPurpose').textContent = item.purpose;
     $('dtMetaWhen').textContent = item.when;
     $('dtMetaRef').textContent = item.refs;
+    $('dtMetaSize').textContent = `${skeleton.split('\n').length} 行 · ${formatBytes(bytesOf(skeleton))}`;
     $('dtSkeleton').setAttribute('aria-label', `模板骨架：${item.title}`);
     paintSkeleton($('dtSkeleton'), skeleton);
     const missing = [...new Set([...(skeleton + path).matchAll(/\{(项目名称|技术栈)\}/g)].map(match => match[1]))];
@@ -448,12 +450,21 @@
   function downloadZip() {
     try {
       const items = itemsFor(state.mode);
-      const files = items.map(item => ({ name: filePath(item), text: resolveTokens(item.skeleton) }));
+      const files = [];
+      for (const item of items) {
+        const name = filePath(item);
+        files.push({ name, text: resolveTokens(item.skeleton) });
+        // demo/ 是纯前端原型：demo/docs/ 与正式 docs/ 同构，镜像一份骨架进去
+        if (name.startsWith('docs/')) {
+          files.push({ name: `demo/${name}`, text: resolveTokens(item.skeleton) });
+        }
+      }
       const entries = [...folderEntries(files.map(file => file.name)), ...files];
       const base = sanitizeName(state.fields.projectName) || 'project';
       const filename = `${base}-docs-骨架-${state.mode}.zip`;
       downloadBlob(zipStore(entries), filename);
-      announce(`已导出 ${files.length} 份骨架：${filename}`);
+      const demoCount = files.length - items.length;
+      announce(`已导出 ${items.length} 份正式骨架 + ${demoCount} 份 demo 镜像（共 ${files.length} 个文件）：${filename}`);
     } catch (error) {
       announce(`ZIP 生成失败：${error.message}`, true);
     }

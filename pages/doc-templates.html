@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101821"><meta name="robots" content="noindex">
-  <meta name="description" content="开发文档模板台：按 docs 目录规划给出 11–13 份标题级文档骨架，选位置、复制、直接贴给 AI Agent。">
+  <meta name="description" content="开发文档模板台：design 定页面有什么、spec 定做成什么样、tasks 定怎么拆，含全局颜色/按钮/弹窗/滚动条规范，选位置、复制、直接贴给 AI Agent。">
   <title>开发文档模板台 · 工作台</title>
   <link rel="stylesheet" href="../css/work-hub.css">
   <link rel="stylesheet" href="../css/doc-templates.css">
@@ -24,8 +24,50 @@
     <section class="hub-hero">
       <p class="eyebrow">DOCUMENT STUDIO / 03</p>
       <h1>先立文档，再让 Agent 动手。</h1>
-      <p>一套固定的 docs 目录 + AGENT.md：设计、任务、规范各就各位。选文件 → 复制骨架 → 贴给 AI，不用每次重讲一遍要求。</p>
-      <div class="chips"><span class="chip" id="dtChipMode">页面规模</span><span class="chip" id="dtChipCount">11–13 个位置</span><span class="chip">只读 · 复制即用</span></div>
+      <p>一套固定的 docs 目录 + AGENT.md：design 说清页面有什么、为什么有；spec 把颜色、字号、按钮、弹窗、滚动条钉成可执行标准；tasks 拆成能勾选的小任务。选文件 → 复制骨架 → 贴给 AI，不用每次重讲一遍要求。</p>
+      <div class="chips"><span class="chip" id="dtChipMode">页面规模</span><span class="chip" id="dtChipCount">11–14 个位置</span><span class="chip">含全局设计规范</span><span class="chip">双端同一套令牌</span><span class="chip">只读 · 复制即用</span></div>
+    </section>
+
+    <section class="panel" aria-labelledby="dtRoleTitle">
+      <div class="dt-head">
+        <div>
+          <p class="eyebrow">ROLES</p>
+          <h2 id="dtRoleTitle">三份文档，各管一件事</h2>
+          <p class="dt-note">同一个页面在三份文件里三副面孔，缺一份就算没写完。编号 B / C / A / F 三处必须对得上：design 里是 B-01，spec 与 tasks 里也必须叫 B-01。</p>
+        </div>
+      </div>
+      <div class="dt-role">
+        <article class="dt-role-card">
+          <p class="dt-role-kicker">DESIGN / 有什么</p>
+          <h3>页面设计</h3>
+          <p>字段清单、板块、组件、按钮、页面状态、业务逻辑。只回答「为什么需要它」，不写像素和色值。</p>
+          <ul class="dt-role-list">
+            <li>每个字段写清「谁在什么情况下用」</li>
+            <li>写不出场景的元素直接删掉</li>
+            <li>字段分两表：清单 + 场景与理由</li>
+          </ul>
+        </article>
+        <article class="dt-role-card dt-role-card--focus">
+          <p class="dt-role-kicker">SPEC / 做成什么样</p>
+          <h3>规范与验收</h3>
+          <p>全局一份设计规范（颜色令牌、字号阶梯、按钮、表单、表格、弹层、滚动条），用户端与管理端共用同一套；页面一份约束与 AC 验收。</p>
+          <ul class="dt-role-list">
+            <li>颜色给到十六进制编号与禁用场景</li>
+            <li>弹窗与按钮下拉框都给到圆角 / 阴影 / 关闭方式</li>
+            <li>每条验收都能判定通过或失败</li>
+          </ul>
+        </article>
+        <article class="dt-role-card">
+          <p class="dt-role-kicker">TASKS / 怎么拆</p>
+          <h3>任务清单</h3>
+          <p>把 design + spec 拆成每页固定 12 条任务，每条写清做什么、改哪些文件、怎么算做完。</p>
+          <ul class="dt-role-list">
+            <li>一条任务半天内做完、改动 ≤3 个文件</li>
+            <li>标准包 T-001 到 T-012，增删要写原因</li>
+            <li>每条任务绑定一个 AC 验收编号</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <section class="panel" aria-labelledby="dtMapTitle">
@@ -33,7 +75,7 @@
         <div>
           <p class="eyebrow">STRUCTURE</p>
           <h2 id="dtMapTitle">先看目录长什么样</h2>
-          <p class="dt-note">docs 放文档，AGENT.md 放在 docs 同级。页面 &gt;5 时三个目录同构，≤5 时直接摊平成单文件。</p>
+          <p class="dt-note">docs 放正式文档，AGENT.md 放在 docs 同级；demo/ 放纯前端原型，demo/docs/ 与 docs/ 同构。页面 &gt;5 时三个目录同构、spec 下另有一份全局 设计规范.md，≤5 时直接摊平成单文件。</p>
         </div>
         <div class="dt-mode" role="group" aria-label="页面数量形态">
           <button type="button" class="dt-mode-btn" data-mode="multi" aria-pressed="true">页面 &gt;5</button>
@@ -83,6 +125,7 @@
           <dl class="dt-meta">
             <div><dt>什么时候写</dt><dd id="dtMetaWhen"></dd></div>
             <div><dt>谁引用</dt><dd id="dtMetaRef"></dd></div>
+            <div><dt>骨架规模</dt><dd id="dtMetaSize"></dd></div>
           </dl>
           <p class="dt-hint" id="dtHint" hidden></p>
           <pre class="dt-skeleton" id="dtSkeleton" tabindex="0" role="region" aria-label="模板骨架"></pre>
@@ -101,9 +144,10 @@
       </div>
       <ol class="dt-steps">
         <li class="dt-step"><b>01 开工</b><p>建 docs 目录，先复制 <code>AGENT.md</code> 与 <code>docs/README.md</code>。</p></li>
-        <li class="dt-step"><b>02 设计</b><p>每个页面先写页面设计，再拆任务，最后补验收标准。</p></li>
-        <li class="dt-step"><b>03 开发</b><p>把设计 + 验收一起贴给 Agent，按编号实现。</p></li>
-        <li class="dt-step"><b>04 变更</b><p>代码改完，同步三份文档，并在变更记录里补一条。</p></li>
+        <li class="dt-step"><b>02 设计</b><p>每页先写板块、按钮、字段，每个字段都要写清场景与理由。</p></li>
+        <li class="dt-step"><b>03 规范</b><p>先定全局颜色、字号、按钮、弹层、滚动条，再写该页的字段约束与 AC。</p></li>
+        <li class="dt-step"><b>04 拆任务</b><p>按 12 条标准包拆，每条绑一个 AC 编号与涉及文件。</p></li>
+        <li class="dt-step"><b>05 开发验收</b><p>设计 + 规范 + 任务一起贴给 Agent，按编号实现，逐条勾选。</p></li>
       </ol>
     </section>
 
@@ -111,9 +155,9 @@
     <noscript><p class="panel">此页面需要启用 JavaScript 才能渲染模板骨架。</p></noscript>
   </main>
   <script>window['work-hub-PW']='work2026';</script>
-  <script src="../script/studio.js"></script>
-  <script src="../js/project-doc-templates.js"></script>
-  <script src="../js/doc-templates.js"></script>
-  <script src="../js/gate.js"></script>
+  <script src="../script/studio.js?v=20261102"></script>
+  <script src="../js/project-doc-templates.js?v=20261102"></script>
+  <script src="../js/doc-templates.js?v=20261102"></script>
+  <script src="../js/gate.js?v=20261102"></script>
 </body>
 </html>

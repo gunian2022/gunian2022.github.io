@@ -23,6 +23,8 @@
 
 | 日期 | 页面 | 类型 | 一句话说明 |
 | --- | --- | --- | --- |
+| 2026-11-03 | 开发文档模板台 | 修改 | 补充「选项形态唯一」：点击按钮弹选项统一用按钮下拉框（spec 7.3.2），六处口径同改，页面规则 9→10 条 |
+| 2026-11-03 | 开发文档模板台 | 重构 | design/spec/tasks 从标题级骨架升级为可执行规范：新增全局设计规范（颜色/字体/按钮/弹层/滚动条/双端一致），spec 给字段约束与 AC 验收，tasks 给 12 条标准任务包；位置数 13→14 |
 | 2026-10-27 | 语义空间 | 修改 | 删除「这间屋子是怎么盖起来的」整块方法说明（四步管线、参数说明、边界与取舍）及其 CSS，页脚上移 |
 | 2026-10-26 | 首页 | 修改 | `#lab` 入口文案同步小屋改版：VECTOR SPACE → CONTENT HOUSE |
 | 2026-10-26 | 语义空间 | 重构 | 三维主体改为「可拆解内容小屋」：5 个结构壳 + 7 个主题展台，拆解不穿模，全站改深色科技底 |
@@ -100,6 +102,8 @@
 
 | 日期 | 类型 | 变更内容 | 影响文件 | 同步文档 | 记录人 |
 | --- | --- | --- | --- | --- | --- |
+| 2026-11-03 | 修改 | 补充「选项形态唯一」规范：点击按钮弹出一组选项统一用按钮下拉框。`spec-visual` 7.3 拆为 7.3.1 表单内选择 + 7.3.2 按钮下拉框（形态判定表、触发器/面板/选项/当前项/危险项/数量/键盘/移动端/禁止），8.4 气泡表与 13 章禁止事项同步；`spec-page` 加 C-05、A-05 与两条约束；`spec-single` 2.6 内嵌同规格；`design-page` 与 `design-single` 按钮表加 A-05；`AGENT.md` 第 6 节、`coding` 第 6 章各加一条；页面规则 9→10 条，SPEC 卡文案同步 | `js/project-doc-templates.js`、`pages/doc-templates.html` | `docs/design/pages/08-doc-templates.md`、`docs/change.md` | Agent |
+| 2026-11-03 | 重构 | design / spec / tasks 从「只有标题的骨架」升级为可执行规范。新增 `docs/spec/设计规范.md`（14 章：设计基调、颜色令牌含涨跌色、字号阶梯、间距圆角描边阴影、布局断点、按钮 6 型 5 态、输入与选择控件、表格、标签卡片分页图标、模态框/抽屉/Toast/Tooltip/z-index、滚动条、动效、双端一致、无障碍、禁止事项、变更记录）。design 页模板改为字段双表（清单 + 场景理由含「不填的后果」）并给 B/C/A/F 编号；spec 页模板改为本页样式取值、骨架尺寸、区块规范、字段约束与校验明细、按钮与弹层表、双端一致、响应式、性能安全、AC 验收表、自测清单；tasks 页模板改为拆分粒度 + 每页固定 12 条标准任务包（T-001~T-012）+ 明细格式 + DoD。slim 版 spec.md 内嵌全局规范。页面新增「三份文档分工」三栏卡与 5 步流程，规则 4→9 条，详情元信息加骨架规模，形态位置数 >5 改为 14 个、≤5 仍 11 个 | `pages/doc-templates.html`、`css/doc-templates.css`、`js/project-doc-templates.js`、`js/doc-templates.js` | `docs/design/pages/08-doc-templates.md`、`docs/design/README.md`、`docs/change.md` | Agent |
 | 2026-10-25 | 修改 | ≤5 页形态改为扁平结构：不建 design / tasks / spec 三个文件夹，docs 下直接放 design.md、tasks.md、spec.md 和一份 变更记录.md；archive/ 保留；形态位置数改为 >5 13 个、≤5 11 个 | `pages/doc-templates.html`、`js/project-doc-templates.js`、`js/doc-templates.js` | `docs/design/pages/08-doc-templates.md`、`docs/design/README.md` | Agent |
 | 2026-10-25 | 重构 | 4 层级改为 docs 双形态目录骨架：页面 >5 建 pages/、≤5 合并单文件；16 份标题级模板、两个资料输入、整套复制与 ZIP；删除重复表单、Markdown 编辑器与草稿导入导出；样式拆到 `css/doc-templates.css`，存储升到 v2 并迁移 v1 资料 | `pages/doc-templates.html`、`css/doc-templates.css`、`js/project-doc-templates.js`、`js/doc-templates.js` | `docs/design/pages/08-doc-templates.md`、`docs/design/README.md` | Agent |
 | 2026-10-24 | 文档 | 建立文档模板台基线：4 层级 3/5/8/10 份、变量表单、Markdown 编辑器、ZIP 导出、草稿备份；代码未改动 | — | `docs/design/pages/08-doc-templates.md` | Agent |
